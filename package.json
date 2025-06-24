@@ -1,0 +1,19 @@
+{
+  "name": "libguidesearch",
+  "version": "1.0.0",
+  "description": "Search LibGuides for multiple search terms",
+  "license": "MIT",
+  "author": "Ken Irwin",
+  "type": "commonjs",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "axios": "^1.10.0",
+    "config": "^4.0.0"
+  },
+  "devDependencies": {
+    "jest": "^30.0.2"
+  }
+}
