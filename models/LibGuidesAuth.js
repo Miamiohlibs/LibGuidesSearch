@@ -12,7 +12,7 @@ class LibGuidesAuth {
 
   async getAuthToken() {
     try {
-      console.log(`${this.libGuidesUrl}/1.2/oauth/token`);
+      //   console.log(`${this.baseUrl}/1.2/oauth/token`);
       const response = await axios.post(`${this.baseUrl}/1.2/oauth/token`, {
         client_id: this.clientId,
         client_secret: this.clientSecret,
