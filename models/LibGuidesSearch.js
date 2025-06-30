@@ -10,7 +10,11 @@ class LibGuidesSearch {
   async searchGuides(query) {
     try {
       const response = await axios.get(`${this.baseUrl}/1.2/guides`, {
-        params: { search_terms: query, sort_by: 'relevance' },
+        params: {
+          search_terms: `"${query}"`,
+          sort_by: 'relevance',
+          expand: 'pages,owner',
+        },
         headers: {
           Authorization: `Bearer ${this.token}`,
         },
