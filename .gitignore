@@ -2,6 +2,3 @@ config/*
 package-lock.json
 node_modules/
 temp*
-cache/
-results/
-output/
