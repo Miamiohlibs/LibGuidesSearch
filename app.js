@@ -11,6 +11,9 @@ const config = require('config');
 app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// Middleware to serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/', (req, res) => {
   const summary = require('./output/summary.json');
 
