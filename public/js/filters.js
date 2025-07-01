@@ -18,24 +18,28 @@ function buildStatusFilter() {
   //iterate unique array and build array of select options
   $.each(items, function (i, item) {
     let itemTag = item.replace(/ /g, '-');
+
     options.push(
-      '<input type="checkbox" id="statuses-' +
+      '<div class="form-check form-check-inline">' +
+        '<input class="form-check-input" type="checkbox" id="statuses-' +
         itemTag +
         '" name="' +
         itemTag +
         '" value="' +
         item +
-        '" checked> <label for="statuses-' +
+        '" checked> ' +
+        '<label class="form-check-label" for="statuses-' +
         itemTag +
         '">' +
         item +
-        '</label>'
+        '</label>' +
+        '</div>'
     );
   });
 
   //finally empty the select and append the items from the array
-  $('#selectType').empty().append(options.join());
-  console.log(options);
+  $('#selectType').empty().append(options.join(''));
+  //   console.log(options);
 }
 $.fn.dataTable.ext.search.push(function (
   settings,
