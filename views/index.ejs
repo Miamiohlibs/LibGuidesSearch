@@ -25,7 +25,7 @@ console.log('unique items: ' + items.length);
 //iterate unique array and build array of select options
 $.each( items, function(i, item){
     let itemTag = item.replace(/ /g, '-');
-    options.push('<input type="checkbox" id="statuses-'+ itemTag +'" name="' + itemTag + '" value="' + item + '"> <label for="statuses-'+ itemTag +'">' + item + '</label>');
+    options.push('<input type="checkbox" id="statuses-'+ itemTag +'" name="' + itemTag + '" value="' + item + '" checked> <label for="statuses-'+ itemTag +'">' + item + '</label>');
 })
 
 //finally empty the select and append the items from the array
@@ -34,8 +34,16 @@ console.log(options);
         }
         $.fn.dataTable.ext.search.push(
     function( settings, searchData, index, rowData, counter ) {
-      
-        return true;
+      var selectedStatuses = [];
+      $('#selectType input:checked').each(function() {
+          selectedStatuses.push($(this).val());
+      });
+      if (selectedStatuses.length > 0) {
+        // Check if the row's type is in the selected statuses
+        if (selectedStatuses.includes(rowData[2])) {
+          return true; // Include this row in the results
+        }
+    }
       
         return false;
     }
@@ -43,6 +51,22 @@ console.log(options);
         $(document).ready( function () {
             buildStatusFilter();
             $('#myTable').DataTable();
+            $('#selectType input').on('change', function() {
+            //     var selectedStatuses = [];
+            //     $('#selectType input:checked').each(function() {
+            //         selectedStatuses.push($(this).val());
+            //     });
+            //     if (selectedStatuses.length > 0) {
+            //         $.fn.dataTable.ext.search.push(
+            //             function(settings, searchData, index, rowData, counter) {
+            //                 return selectedStatuses.includes(rowData[2]);
+            //             }
+            //         );
+            //     } else {
+            //         $.fn.dataTable.ext.search.pop();
+            //     }
+                $('#myTable').DataTable().draw();
+            });
         } );
     </script>
 </head>
