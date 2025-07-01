@@ -21,9 +21,16 @@ app.get('/', (req, res) => {
   });
 });
 
+app.get('/inspect', (req, res) => {
+  res.redirect('/'); // Redirect to the main page if no ID is provided
+});
+
 app.get('/inspect/:id', async (req, res) => {
   const controller = new InspectController();
   const results = controller.inspect(req, res);
+  if (JSON.stringify(req.query).includes('json')) {
+    return res.send(results); // JSON response for API requests
+  }
   res.render('inspect', results); // HTML display
 });
 
