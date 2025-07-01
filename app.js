@@ -41,7 +41,12 @@ app.get('/inspect/:id', async (req, res) => {
     };
   });
   filenames.map((file) => {
-    const filePath = path.join(__dirname, 'cache', file.filename);
+    const filePath = path.join(
+      __dirname,
+      'cache',
+      'libGuidesPages',
+      file.filename
+    );
     file.kwic = [];
     if (fs.existsSync(filePath)) {
       content = fs.readFileSync(filePath, 'utf8'); // Store the content for further processing
