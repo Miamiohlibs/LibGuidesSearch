@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inspect LibGuide: <%= item.name %></title>
+    <%- include ('partials/header-includes') %>
+
 </head>
-<body>
+<body class="container">
     <h1>Inspect LibGuide: <%= item.name %></h1>
     <p><strong>Owner:</strong> <%= item.owner_name %></p>
     <p><strong>Keywords:</strong> <%= JSON.stringify(item.terms) %></p>
     <p><strong># Pages:</strong> <%= item.page_urls.length %></p>
 
-    <h2>Pages</h2>
+    <h2 class="h3">Pages</h2>
         <% results.forEach(function(result) { %>
-            <h3><a href="<%= result.url %>" target="_blank"><%= result.url %></a></h3>
+            <h3 class="h4"><a href="<%= result.url %>" target="_blank"><%= result.url %></a></h3>
             <ul>
                 <% result.kwic.forEach(function(kwics) { %>
                     <% kwics.forEach(function(kwic) { %>

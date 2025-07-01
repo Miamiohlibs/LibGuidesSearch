@@ -4,13 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LibGuides Review</title>
+    <%- include ('partials/header-includes') %>
 </head>
-<body>
-    <table>
+<body class="container">
+    <table class="table table-striped">
         <thead>
             <tr>
                 <th>Name</th>
                 <th>Owner</th>
+                <th>Status</th>
                 <th>Keywords</th>
                 <th># Pages</th>
                 <th>Actions</th>
@@ -21,9 +23,10 @@
                 <tr>
                     <td><a href="<%= document.url %>" target="_blank"><%= document.name %></a></td>
                     <td><%= document.owner_name %></td>
+                    <td><%= document.status_label %></td>
                     <td><%= JSON.stringify(document.terms) %></td>
                     <td><%= document.page_urls.length %></td>
-                    <td><a href="/inspect/<%= document.id %>">Inspect</a></td>
+                    <td><a href="/inspect/<%= document.id %>"><i class="bi bi-eye"></i></a></td>
                 </tr>
             <% }); %>
         </tbody>

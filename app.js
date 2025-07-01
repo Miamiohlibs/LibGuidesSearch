@@ -5,6 +5,7 @@ const app = express();
 const filenamify = require('./helpers/filenamify-url');
 const Kwic = require('./models/KeywordContext');
 const kwic = new Kwic();
+const config = require('config');
 
 // basic express server setup
 app.set('views', path.resolve(__dirname, 'views'));
@@ -55,7 +56,7 @@ app.get('/inspect/:id', async (req, res) => {
 });
 
 // Uncomment the following lines to run the server
-const PORT = process.env.PORT || 3000; // Use environment variable or default to 3000
+const PORT = config.get('app.port') || 3000; // Use environment variable or default to 3000
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   console.log(`Go to http://localhost:${PORT}/`);
