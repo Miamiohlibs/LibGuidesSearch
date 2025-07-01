@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const config = require('config');
 const InspectController = require('./controllers/InspectController');
+const querystring = require('querystring');
 
 // basic express server setup
 app.set('views', path.resolve(__dirname, 'views'));
@@ -28,9 +29,16 @@ app.get('/inspect', (req, res) => {
 app.get('/inspect/:id', async (req, res) => {
   const controller = new InspectController();
   const results = controller.inspect(req, res);
+  // create url query string for the view
+  const queryString = querystring.stringify(req.query);
+  console.log(`Query String: ${queryString}`);
+  //   const queryString = Object.keys(req.query)
+  //     .map((key) => `${key}=${encodeURIComponent(req.query[key])}`)
+  //     .join('&');
   if (JSON.stringify(req.query).includes('json')) {
     return res.send(results); // JSON response for API requests
   }
+  results.queryString = queryString; // Add query string to results for the view
   res.render('inspect', results); // HTML display
 });
 

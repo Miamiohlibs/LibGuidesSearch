@@ -9,11 +9,44 @@
     <script>
         $(document).ready(function () {
             buildStatusFilter();
+            let types = new URLSearchParams(window.location.search).get('types') || [];
+            if (types.length > 0) {
+                $('#selectType input[type="checkbox"]').prop('checked', false);
+                types = types.split(',');
+                types.forEach(function(type) {
+                    $(`input[type="checkbox"][value="${type}"]`).prop('checked', true);
+                });
+            }
             $('#myTable').DataTable();
+
             $('#selectType input').on('change', function () {
                 $('#myTable').DataTable().draw();
+                let checkedTypes = [];
+                    $('input[type="checkbox"]').each(function () {
+                    if ($(this).is(':checked')) {
+                        checkedTypes.push($(this).val());
+                    }
+                });
+                $('.inspect-link').each(function () {              
+                    let currentHref = $(this).attr('href');
+                    const baseUrl = window.location.origin;
+                    // console.log(checkedTypes)
+                    // // Create a URL object
+                    let url = new URL(currentHref, baseUrl);
+                    if (checkedTypes.length > 0) {
+                        // Add the 'types' parameter to the URL
+                        url.searchParams.set('types', checkedTypes.join(','));
+                        $(this).attr('href', url.toString());
+                    } else {
+                        // If no types are checked, remove the 'types' parameter
+                        url.searchParams.delete('types');
+                        $(this).attr('href', url.toString());
+                    }
+                });
+     
+                });
+                    
             });
-        });
     </script>
 </head>
 <body class="container">
@@ -42,7 +75,7 @@
                     <td><%= document.status_label %></td>
                     <td><%= JSON.stringify(document.terms).replaceAll('","', '", "') %></td>
                     <td><%= document.page_urls.length %></td>
-                    <td><a href="/inspect/<%= document.id %>"><i class="bi bi-eye"></i></a></td>
+                    <td><a href="/inspect/<%= document.id %>" class="inspect-link"><i class="bi bi-eye"></i></a></td>
                 </tr>
             <% }); %>
         </tbody>
