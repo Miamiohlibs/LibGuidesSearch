@@ -1,0 +1,12 @@
+{
+    "app": {
+        "port": 3000,
+        "host": "localhost",
+    },
+    "libGuides": {
+        "baseUrl": "https://lgapi-us.libapps.com",
+        "clientId": "123",
+        "clientSecret": "yourclientsecret",
+    },
+    "wordListConfig": "sample-wordlist.js" // in the config directory
+}
