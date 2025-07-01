@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspect LibGuide: <%= item.name %></title>
+</head>
+<body>
+    <h1>Inspect LibGuide: <%= item.name %></h1>
+    <p><strong>Owner:</strong> <%= item.owner_name %></p>
+    <p><strong>Keywords:</strong> <%= JSON.stringify(item.terms) %></p>
+    <p><strong># Pages:</strong> <%= item.page_urls.length %></p>
+
+    <h2>Pages</h2>
+        <% results.forEach(function(result) { %>
+            <h3><a href="<%= result.url %>" target="_blank"><%= result.url %></a></h3>
+            <ul>
+                <% result.kwic.forEach(function(kwics) { %>
+                    <% kwics.forEach(function(kwic) { %>
+                    <li>
+                        <%= kwic.pre %><b><%= kwic.keyword %></b><%= kwic.post %>
+                    </li>
+                    <% }); %>
+                <% }); %>
+            </ul>
+        <% }); %>
+
+
+    <a href="/">Back to Summary</a>
+</body>
+</html>
