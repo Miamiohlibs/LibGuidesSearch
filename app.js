@@ -7,7 +7,6 @@ const Kwic = require('./models/KeywordContext');
 const kwic = new Kwic();
 
 // basic express server setup
-// app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -32,8 +31,6 @@ app.get('/inspect/:id', async (req, res) => {
   }
   const filenames = item.page_urls.map((url) => {
     const filename = filenamify(url);
-    console.log(`URL: ${url}`);
-    console.log(`Filename: ${filename}`);
     return {
       url: url,
       filename: filename,
@@ -43,10 +40,8 @@ app.get('/inspect/:id', async (req, res) => {
     const filePath = path.join(__dirname, 'cache', file.filename);
     file.kwic = [];
     if (fs.existsSync(filePath)) {
-      //   console.log(`File: ${file.filename} exists.`);
       content = fs.readFileSync(filePath, 'utf8'); // Store the content for further processing
       item.terms.forEach((term) => {
-        console.log(`Searching for term: ${term}`);
         let results = kwic.find(content, term); // Find the keyword context
         if (results.length > 0) {
           file.kwic.push(results); // Get KWIC context
@@ -55,9 +50,8 @@ app.get('/inspect/:id', async (req, res) => {
       //   file.content = content; // Store the content in the file object
     }
   });
-  //   res.send({ item, results: filenames });
-  res.render('inspect', { item, results: filenames });
-  //   console.log(fileContents);
+  //   res.send({ item, results: filenames }); // JSON display
+  res.render('inspect', { item, results: filenames }); // HTML display
 });
 
 // Uncomment the following lines to run the server
