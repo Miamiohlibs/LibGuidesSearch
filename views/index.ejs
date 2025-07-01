@@ -6,6 +6,15 @@
     <title>LibGuides Review</title>
     <%- include ('partials/header-includes') %>
     <script src="/js/filters.js"></script>
+    <script>
+        $(document).ready(function () {
+            buildStatusFilter();
+            $('#myTable').DataTable();
+            $('#selectType input').on('change', function () {
+                $('#myTable').DataTable().draw();
+            });
+        });
+    </script>
 </head>
 <body class="container">
     <div id="selectTypeBox" class="mb-3">

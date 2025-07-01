@@ -41,6 +41,8 @@ function buildStatusFilter() {
   $('#selectType').empty().append(options.join(''));
   //   console.log(options);
 }
+
+// modeled on: https://live.datatables.net/nelujavu/51/edit
 $.fn.dataTable.ext.search.push(function (
   settings,
   searchData,
@@ -60,11 +62,4 @@ $.fn.dataTable.ext.search.push(function (
   }
 
   return false;
-});
-$(document).ready(function () {
-  buildStatusFilter();
-  $('#myTable').DataTable();
-  $('#selectType input').on('change', function () {
-    $('#myTable').DataTable().draw();
-  });
 });
