@@ -1,6 +1,6 @@
 #!/usr/bin/env bash 
 
-# Note: unlike stages 1, 2, and 4, this is SHELL SCRIPT, not JavaScript.
+# Note: unlike stages 1 and 2, this is SHELL SCRIPT, not JavaScript.
 
 # This script summarizes the data from the previous stage and outputs it to a file.
 # Usage: ./stage3-summarizeData.sh
