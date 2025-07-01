@@ -2,9 +2,19 @@ const config = require('config');
 const libGuidesConfig = config.get('libGuides');
 const LibGuidesAuth = require('./models/LibGuidesAuth');
 const libGuidesAuth = new LibGuidesAuth(libGuidesConfig);
-const terms = require('./config/bad-words-jun-2025');
 const LibGuidesSearch = require('./models/LibGuidesSearch');
 const fs = require('fs');
+const path = require('path');
+
+// get wordlist from file specified in config
+const wordlistFile = config.get('wordListConfig');
+const wordlistPath = path.resolve(__dirname, 'config', wordlistFile);
+if (!fs.existsSync(wordlistPath)) {
+  console.error(`Wordlist file not found: ${wordlistPath}`);
+  process.exit(1);
+}
+// wordlistFile is a javascript array of terms
+const terms = require(wordlistPath);
 
 // retrieve results from libGuides and output to file
 (async () => {
