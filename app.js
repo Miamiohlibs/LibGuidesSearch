@@ -4,7 +4,6 @@ const app = express();
 const config = require('config');
 const InspectController = require('./controllers/InspectController');
 const querystring = require('querystring');
-const { json } = require('stream/consumers');
 const json2csv = require('json2csv').parse;
 // basic express server setup
 app.set('views', path.resolve(__dirname, 'views'));
