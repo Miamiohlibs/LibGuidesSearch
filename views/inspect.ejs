@@ -9,6 +9,8 @@
 </head>
 <body class="container">
     <h1>Inspect LibGuide: <%= item.name %></h1>
+    <%- include ('partials/back-button', { queryString: queryString }) %>
+
     <p><strong>Owner:</strong> <%= item.owner_name %></p>
     <p><strong>Keywords:</strong> <%= JSON.stringify(item.terms) %></p>
     <p><strong># Total Pages:</strong> <%= item.page_urls.length %></p>
@@ -30,7 +32,5 @@
             </ul>
         <% }); %>
 
-
-    <a href="/?<%= queryString %>">Back to Summary</a>
 </body>
 </html>

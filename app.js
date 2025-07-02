@@ -5,6 +5,7 @@ const config = require('config');
 const InspectController = require('./controllers/InspectController');
 const querystring = require('querystring');
 const json2csv = require('json2csv').parse;
+
 // basic express server setup
 app.set('views', path.resolve(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -74,7 +75,6 @@ app.get('/report', (req, res) => {
   }
 });
 
-// Uncomment the following lines to run the server
 const PORT = config.get('app.port') || 3000; // Use environment variable or default to 3000
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
