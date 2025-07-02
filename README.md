@@ -34,7 +34,7 @@ On the Linux command line, run: `fetchData.sh` -- Note: this will take a long ti
 - `node ./stage1-fetchData.js`
 - `node ./stage2-collateData.js`
 - `./stage3-summarizeData.sh`
-- `./stage4-LONG-fetchGuideContents.sh`
+- `./stage4-SLOW-fetchGuideContents.sh`
 
 Stage 1 runs a LibGuides API search query for each search term, and saves the each result to a JSON file in `cache/apiSearchResults`. Stage 2 collates the results from all the search queries into a single file: `output/results.json`. Stage 3 summarizes the data in `output/summary.json` -- it includes the guide metadata, a list of terms found, and a list of all the page urls. Stage 4 fetches the full contents of each found guide and saves them in `cache/libGuidesPages`; this can take a long time depending on the number of guides.
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # This script fetches the guide contents from the URLs listed in output/page_urls.txt
-# Usage: ./stage4-LONG-fetchGuideContents.sh
+# Usage: ./stage4-SLOW-fetchGuideContents.sh
 # reads input from output/page_urls.txt
 # writes output to cache/libGuidesPages
 
