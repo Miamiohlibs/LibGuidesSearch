@@ -27,21 +27,29 @@ app.get('/inspect', (req, res) => {
 });
 
 app.get('/inspect/:id', async (req, res) => {
-  const controller = new InspectController();
-  const results = controller.inspect(req, res);
-  // create url query string for the view
-  const queryString = querystring.stringify(req.query);
-  console.log(`Query String: ${queryString}`);
-  //   const queryString = Object.keys(req.query)
-  //     .map((key) => `${key}=${encodeURIComponent(req.query[key])}`)
-  //     .join('&');
-  if (JSON.stringify(req.query).includes('json')) {
-    return res.send(results); // JSON response for API requests
+  const id = req.params.id;
+  try {
+    const results = InspectController(id);
+    // create url query string for the view
+    const queryString = querystring.stringify(req.query);
+    console.log(`Query String: ${queryString}`);
+    if (JSON.stringify(req.query).includes('json')) {
+      return res.send(results); // JSON response for API requests
+    }
+    results.queryString = queryString; // Add query string to results for the view
+    res.render('inspect', results); // HTML display
+  } catch (error) {
+    console.error(`Error inspecting ID ${id}:`, error);
+    return res.status(400).send('Entry not found or invalid ID');
   }
-  results.queryString = queryString; // Add query string to results for the view
-  res.render('inspect', results); // HTML display
 });
 
+app.get('/report', (req, res) => {
+  const summary = require('./output/summary.json');
+  const ReportController = require('./controllers/ReportController');
+  let report = ReportController();
+  res.send(report);
+});
 // Uncomment the following lines to run the server
 const PORT = config.get('app.port') || 3000; // Use environment variable or default to 3000
 app.listen(PORT, () => {
