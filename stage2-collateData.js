@@ -1,7 +1,12 @@
-const terms = require('./config/bad-words-jun-2025');
+const config = require('config');
 const fs = require('fs');
 const path = require('path');
-outputFile = path.resolve(__dirname, 'output', 'results.json');
+const wordListFile = config.get('wordListConfig');
+
+const termFile = path.resolve(__dirname, 'config', wordListFile);
+// const terms = fs.existsSync(termFile) ? fs.readFileSync(termFile, 'utf8').split('\n').filter(Boolean) : [];
+const terms = require(termFile);
+const outputFile = path.resolve(__dirname, 'output', 'results.json');
 
 // read from file and compile results
 const Results = require('./models/Results');
