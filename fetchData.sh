@@ -11,3 +11,6 @@ echo "Stage 3: Summarizing the collated data..."
 echo
 echo "Stage 4: Fetching guide contents..."
 ./stage4-LONG-fetchGuideContents.sh
+echo "Generating the final report..."
+/usr/bin/env node ./generateReport.js
+echo
