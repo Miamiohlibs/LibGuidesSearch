@@ -1,14 +1,9 @@
 const summary = require('../output/summary.json');
-const fs = require('fs');
-const path = require('path');
-const filenamify = require('../helpers/filenamify-url');
-const Kwic = require('../models/KeywordContext');
-const kwic = new Kwic();
 const InspectController = require('./InspectController');
 
 module.exports = ReportController = function ReportController() {
-  const reportItems = summary.slice(0, 10); // Limit to first 10 items for testing
-  // const reportItems = summary; // Use the entire summary for the report
+  // const reportItems = summary.slice(0, 10); // Limit to first 10 items for testing
+  const reportItems = summary; // Use the entire summary for the report
   const report = {
     totalGuides: reportItems.length,
     totalEntries: 0,
