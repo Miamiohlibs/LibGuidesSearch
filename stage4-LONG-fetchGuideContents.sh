@@ -16,16 +16,16 @@ mkdir -p cache
 # create cache/libGuidesPages directory if it doesn't exist
 mkdir -p cache/libGuidesPages 
 
-# make sure the filenamify command is available
-if ! command -v filenamify &> /dev/null; then
-  echo "filenamify command not found. Please install it to proceed."
-  exit 1
-fi  
+# # make sure the filenamify command is available
+# if ! command -v filenamify &> /dev/null; then
+#   echo "filenamify command not found. Please install it to proceed."
+#   exit 1
+# fi  
 
 # read each URL from the input file and fetch the content if it is not already cached
 while IFS= read -r url; do
   # generate a filename from the URL
-  filename=$(filenamify "$url")
+  filename=$(/usr/bin/env node ./helpers/filenamify-cli "$url")
   # check if the file already exists in the cache
   if [ -f "cache/libGuidesPages/$filename" ]; then
     echo "Content for $url already cached as cache/libGuidesPages/$filename"
