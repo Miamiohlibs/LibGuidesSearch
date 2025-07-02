@@ -8,5 +8,6 @@
         "clientId": "123",
         "clientSecret": "yourclientsecret",
     },
-    "wordListConfig": "sample-wordlist.js" // in the config directory
+    "wordListConfig": "sample-wordlist.js",
+    "_wordListConfigNote": "the wordListConfig file should be js file in the config directory that exports an array called 'terms'. Example: module.exports.terms = ['badword1', 'badword2'];", 
 }
