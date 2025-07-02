@@ -61,25 +61,26 @@
     <table class="table table-striped" id="myTable">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Inspect</th>
+                <th>Title</th>
                 <th>Owner</th>
                 <th>Type</th>
                 <th>Status</th>
                 <th>Keywords</th>
                 <th># Pages</th>
-                <th>Actions</th>
+                
             </tr>
         </thead>
         <tbody>
             <% summary.forEach(function(document) { %>
                 <tr>
+                    <td><a href="/inspect/<%= document.id %>" class="btn btn-primary inspect-link"><i class="bi bi-eye"></i></a></td>
                     <td><a href="<%= document.url %>" target="_blank"><%= document.name %></a></td>
                     <td><%= document.owner_name %></td>
                     <td><%= document.type_label %></td>
                     <td><%= document.status_label %></td>
                     <td><%= JSON.stringify(document.terms).replaceAll('","', '", "') %></td>
                     <td><%= document.page_urls.length %></td>
-                    <td><a href="/inspect/<%= document.id %>" class="inspect-link"><i class="bi bi-eye"></i></a></td>
                 </tr>
             <% }); %>
         </tbody>

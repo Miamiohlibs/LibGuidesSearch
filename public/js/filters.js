@@ -3,7 +3,7 @@ function buildStatusFilter() {
     options = [];
 
   //Iterate all td's in third column
-  $('#myTable tbody tr td:nth-child(3)').each(function () {
+  $('#myTable tbody tr td:nth-child(4)').each(function () {
     //add item to array
     items.push($(this).text());
   });
@@ -56,10 +56,9 @@ $.fn.dataTable.ext.search.push(function (
   });
   if (selectedStatuses.length > 0) {
     // Check if the row's type is in the selected statuses
-    if (selectedStatuses.includes(rowData[2])) {
+    if (selectedStatuses.includes(rowData[3])) {
       return true; // Include this row in the results
     }
   }
-
   return false;
 });
