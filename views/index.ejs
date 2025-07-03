@@ -8,8 +8,21 @@
     <script src="/js/filters.js"></script>
     <script>
         $(document).ready(function () {
+
             buildStatusFilter();
             let types = new URLSearchParams(window.location.search).get('types') || [];
+            $('.inspect-link').each(function () {
+                //append current URL query string to the inspect link on load
+                let currentHref = $(this).attr('href');
+                const baseUrl = window.location.origin;
+                // Create a URL object
+                let url = new URL(currentHref, baseUrl);
+                if (types.length > 0) {
+                    // Add the 'types' parameter to the URL
+                    url.searchParams.set('types', types);
+                    $(this).attr('href', url.toString());
+                }            
+            });
             if (types.length > 0) {
                 $('#selectType input[type="checkbox"]').prop('checked', false);
                 types = types.split(',');
@@ -61,26 +74,26 @@
     <table class="table table-striped" id="myTable">
         <thead>
             <tr>
-                <th>Inspect</th>
+                <!-- <th>Inspect</th> -->
                 <th>Title</th>
                 <th>Owner</th>
                 <th>Type</th>
                 <th>Status</th>
                 <th>Keywords</th>
-                <th># Pages</th>
+                <th>Guide Link</th>
                 
             </tr>
         </thead>
         <tbody>
             <% summary.forEach(function(document) { %>
                 <tr>
-                    <td><a href="/inspect/<%= document.id %>" class="btn btn-primary inspect-link"><i class="bi bi-eye"></i></a></td>
-                    <td><a href="<%= document.url %>" target="_blank"><%= document.name %></a></td>
+                    <!-- <td><a href="/inspect/<%= document.id %>" class="btn btn-primary inspect-link"><i class="bi bi-eye"></i></a></td> -->
+                    <td><a href="/inspect/<%= document.id %>" class="inspect-link"><%= document.name %></a></td>
                     <td><%= document.owner_name %></td>
                     <td><%= document.type_label %></td>
                     <td><%= document.status_label %></td>
                     <td><%= JSON.stringify(document.terms).replaceAll('","', '", "') %></td>
-                    <td><%= document.page_urls.length %></td>
+                    <td><a href="<%= document.url %>" target="_blank"><i class="bi bi-link-45deg"></i></a></td>
                 </tr>
             <% }); %>
         </tbody>
