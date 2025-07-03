@@ -64,7 +64,7 @@ $.fn.dataTable.ext.search.push(function (
   });
   if (selectedStatuses.length > 0) {
     // Check if the row's type is in the selected statuses
-    if (selectedStatuses.includes(rowData[3])) {
+    if (selectedStatuses.includes(rowData[typeArrayIndex])) {
       return true; // Include this row in the results
     }
   }
