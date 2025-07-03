@@ -6,7 +6,7 @@ If you just want to search for one or two terms, you can use LibGuides' own sear
 
 ## Requirements
 
-- npm & Node.js (v24 or later) [Installation instructions](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- npm & Node.js (v20 or later) [Installation instructions](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - Bash shell
 - Linux/Mac command-line
 
