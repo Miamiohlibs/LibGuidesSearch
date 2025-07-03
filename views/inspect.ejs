@@ -8,6 +8,7 @@
 
 </head>
 <body class="container">
+    <main>
     <h1>Inspect LibGuide: <%= item.name %></h1>
     <%- include ('partials/back-button', { queryString: queryString }) %>
 
@@ -31,6 +32,7 @@
                 <% }); %>
             </ul>
         <% }); %>
+    </main>
         <%- include('partials/footer') -%>
 
 </body>
