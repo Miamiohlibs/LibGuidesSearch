@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const config = require('config');
 const InspectController = require('./controllers/InspectController');
-const querystring = require('querystring');
 const json2csv = require('json2csv').parse;
 
 // basic express server setup
@@ -32,7 +31,8 @@ app.get('/inspect/:id', async (req, res) => {
   try {
     const results = InspectController(id);
     // create url query string for the view
-    const queryString = querystring.stringify(req.query);
+
+    const queryString = new URLSearchParams(req.query).toString();
     console.log(`Query String: ${queryString}`);
     if (JSON.stringify(req.query).includes('json')) {
       return res.send(results); // JSON response for API requests
