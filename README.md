@@ -7,9 +7,7 @@ If you just want to search for one or two terms, you can use LibGuides' own sear
 ## Requirements
 
 - npm & Node.js (v20 or later) [Installation instructions](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-- Bash shell
 - Linux/Mac command-line
-- jq [Installation Instructions](https://jqlang.org/download/)
 
 ## Setup
 
@@ -24,20 +22,25 @@ If you just want to search for one or two terms, you can use LibGuides' own sear
    - Give it the permissions for "Get list of Guides"
 6. Edit the `config/default.json` file to set your LibGuides API clientId and clientSecret and any other configuration options you need.
 7. Copy the `config/sample-wordlist.js` to another file, e.g. `config/wordlist.js`, and edit it to include the search terms you want to use. The sample file includes a few example terms, but you can add as many as you like. Each term should be a string in the array. Update the `config/default.json` file's `wordListConfig` value to point to your wordlist file if you named it something other than `sample-wordlist.js`.
-8. On the Linux/Mac command line run: `./fetchData.sh` to fetch the data. This will take a long time (maybe 15 minutes), as it runs a succession of scripts to fetch and process the data.
+8. On the Linux/Mac command line run: `./runAllStages.sh` to fetch and process the data. This will take a long time (maybe 15 minutes), as it runs a succession of scripts to fetch and process the data.
 9. At this point, you should have a `public/docs/libGuidesSearchReport.csv` file that contains a report of the search results.
 10. You can now run the web app with `node ./app.js` to start the search engine. By default it will run on port 3000 on your own machine; you can change the port in the `config/default.json` file.
 
 ## Usage
 
-On the Linux command line, run: `fetchData.sh` -- Note: this will take a long time. It runs a succession of four Node and Bash scripts, which you can run individually if needed:
+On the Linux command line, run: `runAllStages.js` -- Note: this will take a long time. It runs a succession of four Node and Bash scripts, which you can run individually if needed:
 
 - `node ./stage1-fetchData.js`
 - `node ./stage2-collateData.js`
-- `./stage3-summarizeData.sh`
-- `./stage4-SLOW-fetchGuideContents.sh`
+- `node ./stage3-summarizeData.js`
+- `node ./stage4-SLOW-fetchGuideContents.js`
+- `node ./stage5-generateReport.js`
 
-Stage 1 runs a LibGuides API search query for each search term, and saves the each result to a JSON file in `cache/apiSearchResults`. Stage 2 collates the results from all the search queries into a single file: `output/results.json`. Stage 3 summarizes the data in `output/summary.json` -- it includes the guide metadata, a list of terms found, and a list of all the page urls. Stage 4 fetches the full contents of each found guide and saves them in `cache/libGuidesPages`; this can take a long time depending on the number of guides.
+Stage 1 runs a LibGuides API search query for each search term, and saves the each result to a JSON file in `cache/apiSearchResults`. Stage 2 collates the results from all the search queries into a single file: `output/results.json`. Stage 3 summarizes the data in `output/summary.json` -- it includes the guide metadata, a list of terms found, and a list of all the page urls. Stage 4 fetches the full contents of each found guide and saves them in `cache/libGuidesPages`; this can take a long time depending on the number of guides. Stage 5 generates a report in CSV format from the summary data and saves it in `public/docs/libGuidesSearchReport.csv`.
+
+Note: for Stage 4, the script only fetches the contents if the cached file does not already exist. If you want to re-fetch the contents, you can delete the `cache/libGuidesPages` directory and run the script again. This saves time if you are running the script multiple times, as it will not re-fetch the contents of guides that have already been fetched.
+
+You can skip one or more stages by running `node ./runAllStages.js --start-from 3` to start from stage 3, for example. This is useful if you have already run the previous stages and just want to re-run from a specific stage. You can also run the stages individually, for example `node ./stage1-fetchData.js` to just run the first stage.
 
 Once the data have been harvested and process, run the web app with `node ./app.js`. This will start a web server on port 3000 (or another port specified in the `config/default.json` file).
 
