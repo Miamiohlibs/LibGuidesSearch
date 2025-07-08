@@ -9,6 +9,7 @@ If you just want to search for one or two terms, you can use LibGuides' own sear
 - npm & Node.js (v20 or later) [Installation instructions](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - Bash shell
 - Linux/Mac command-line
+- jq [Installation Instructions](https://jqlang.org/download/)
 
 ## Setup
 
