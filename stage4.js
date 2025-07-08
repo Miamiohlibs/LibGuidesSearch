@@ -8,7 +8,7 @@ const { existsSync, mkdirSync } = require('fs');
 const path = require('path');
 const https = require('https');
 const http = require('http');
-const filenamify = require('filenamify').default;
+const filenamify = require('./helpers/filenamify-url');
 
 const inputPath = 'output/page_urls.txt';
 const cacheDir = 'cache/libGuidesPages';
@@ -51,15 +51,6 @@ function fetch(url) {
   });
 }
 
-function runFilenamify(input) {
-  // Remove http:// or https://
-  const httpRegex = /^https?:\/\//i;
-  input = input.replace(httpRegex, '');
-
-  // Convert the input string to a valid filename
-  return filenamify(input);
-}
-
 async function processUrls() {
   if (!(await fileExists(inputPath))) {
     console.error(`Input file ${inputPath} does not exist.`);
@@ -75,7 +66,7 @@ async function processUrls() {
   for (const url of urls) {
     let filename;
     try {
-      filename = await runFilenamify(url);
+      filename = await filenamify(url);
     } catch (err) {
       console.error(`Failed to generate filename for ${url}: ${err.message}`);
       continue;
