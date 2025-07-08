@@ -9,7 +9,7 @@ module.exports = InspectController = function InspectController(id) {
   // find the requested item in the summary by id
   const item = summary.find((item) => parseInt(item.id) === parseInt(id));
   if (!item) {
-    console.log(summary);
+    // console.log(summary);
     return res.status(404).send('Item not found');
   }
 

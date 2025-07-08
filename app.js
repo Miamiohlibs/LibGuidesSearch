@@ -33,7 +33,7 @@ app.get('/inspect/:id', async (req, res) => {
     // create url query string for the view
 
     const queryString = new URLSearchParams(req.query).toString();
-    console.log(`Query String: ${queryString}`);
+    // console.log(`Query String: ${queryString}`);
     if (JSON.stringify(req.query).includes('json')) {
       return res.send(results); // JSON response for API requests
     }
