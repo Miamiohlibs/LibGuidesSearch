@@ -1,4 +1,10 @@
-// summarize.js
+/*
+ * This script summarizes the data from the previous stage and outputs it to a file.
+ * Usage: ./stage3-summarizeData.sh
+ * reads input from output/results.json
+ * writes output to output/summary.json
+ * then outputs page urls only to output/page_urls.txt
+ */
 const fs = require('fs/promises');
 const path = require('path');
 
