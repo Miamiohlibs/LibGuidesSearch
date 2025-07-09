@@ -11,10 +11,19 @@
     <main>
     <h1>Inspect LibGuide: <%= item.name %></h1>
     <%- include ('partials/back-button', { queryString: queryString }) %>
-
+    <div class="mt-4">
+    <form id="kwic-chars-form" method="get">      
     <p><strong>Owner:</strong> <%= item.owner_name %></p>
     <p><strong>Keywords:</strong> <%= JSON.stringify(item.terms) %></p>
     <p><strong># Total Pages:</strong> <%= item.page_urls.length %></p>
+
+        <p class="input-group">
+            <span class="input-group-text"><strong>Characters Around Keywords</strong> </span>
+            <input type="text" name="kwicChars" size="3" value="<%= kwicChars %>">
+            <input type="submit" value="Change" class="btn btn-sm btn-secondary">
+        </p>
+    </form>
+</div>
 
     <h2 class="h3">Pages</h2>
         <% results.forEach(function(result) { %>

@@ -42,7 +42,9 @@ app.get('/inspect/:id', async (req, res) => {
     res.render('inspect', results); // HTML display
   } catch (error) {
     console.error(`Error inspecting ID ${id}:`, error);
-    return res.status(400).send(`Entry not found or invalid ID: ${id}`);
+    return res
+      .status(400)
+      .send(`Entry not found or invalid ID: ${id}; ${error}`);
   }
 });
 
