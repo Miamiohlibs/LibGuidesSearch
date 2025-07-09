@@ -79,7 +79,7 @@
                 <th>Title</th>
                 <th>Owner</th>
                 <th>Type</th>
-                <th>Status</th>
+                <!-- <th>Status</th> -->
                 <th>Keywords</th>
                 <th>Guide Link</th>
                 
@@ -92,7 +92,7 @@
                     <td><a href="/inspect/<%= document.id %>" class="inspect-link"><%= document.name %></a></td>
                     <td><%= document.owner_name %></td>
                     <td><%= document.type_label %></td>
-                    <td><%= document.status_label %></td>
+
                     <td><%= JSON.stringify(document.terms).replaceAll('","', '", "') %></td>
                     <td><a href="<%= document.url %>" target="_blank"><i class="bi bi-link-45deg"></i></a></td>
                 </tr>
