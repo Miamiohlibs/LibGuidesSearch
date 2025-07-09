@@ -1,6 +1,14 @@
+const config = require('config');
+
 module.exports = class KeywordContext {
   constructor() {
     this.chars = 50; // Number of characters to show before and after the keyword
+    if (config.has('keywordInContextChars')) {
+      let chars = config.get('keywordInContextChars');
+      if (parseInt(chars) != NaN) {
+        this.chars = chars;
+      }
+    }
   }
 
   find(haystack, needle, chars = this.chars) {
