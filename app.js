@@ -28,8 +28,9 @@ app.get('/inspect', (req, res) => {
 
 app.get('/inspect/:id', async (req, res) => {
   const id = req.params.id;
+  let kwicChars = req.query.kwicChars || undefined;
   try {
-    const results = InspectController(id);
+    const results = InspectController(id, kwicChars);
     // create url query string for the view
 
     const queryString = new URLSearchParams(req.query).toString();

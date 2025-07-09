@@ -2,7 +2,10 @@ const config = require('config');
 
 module.exports = class KeywordContext {
   constructor() {
+    // default to showing 50 chars on either side of keyword
     this.chars = 50; // Number of characters to show before and after the keyword
+
+    // override default with config
     if (config.has('keywordInContextChars')) {
       let chars = config.get('keywordInContextChars');
       if (parseInt(chars) != NaN) {
@@ -30,5 +33,9 @@ module.exports = class KeywordContext {
     }
     // If no matches found, return an empty array
     return [];
+  }
+
+  setChars(n) {
+    this.chars = n;
   }
 };

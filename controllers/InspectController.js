@@ -5,7 +5,10 @@ const filenamify = require('../helpers/filenamify-url');
 const Kwic = require('../models/KeywordContext');
 const kwic = new Kwic();
 
-module.exports = InspectController = function InspectController(id) {
+module.exports = InspectController = function InspectController(
+  id,
+  kwicChars = undefined
+) {
   // find the requested item in the summary by id
   const item = summary.find((item) => parseInt(item.id) === parseInt(id));
   if (!item) {
@@ -35,6 +38,9 @@ module.exports = InspectController = function InspectController(id) {
     );
     file.kwic = [];
     if (fs.existsSync(filePath)) {
+      if (kwicChars != undefined) {
+        kwic.setChars(kwicChars);
+      }
       const content = fs.readFileSync(filePath, 'utf8'); // Store the content for further processing
       item.terms.forEach((term) => {
         let results = kwic.find(content, term); // Find the keyword context
