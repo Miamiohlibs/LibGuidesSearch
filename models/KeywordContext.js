@@ -36,6 +36,10 @@ module.exports = class KeywordContext {
   }
 
   setChars(n) {
-    this.chars = n;
+    let nInt = parseInt(n);
+    if (nInt != NaN) {
+      this.chars = nInt;
+    }
+    // console.log(`reset kwicChars to ${nInt}`);
   }
 };

@@ -51,5 +51,5 @@ module.exports = InspectController = function InspectController(
     }
   });
 
-  return { item, results: filenames };
+  return { item, kwicChars: kwic.chars, results: filenames };
 };
