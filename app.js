@@ -28,20 +28,25 @@ app.get('/inspect', (req, res) => {
 
 app.get('/inspect/:id', async (req, res) => {
   const id = req.params.id;
+  let kwicChars = req.query.kwicChars || undefined;
   try {
-    const results = InspectController(id);
+    const results = InspectController(id, kwicChars);
     // create url query string for the view
 
     const queryString = new URLSearchParams(req.query).toString();
+    const types = new URLSearchParams(req.query).get('types');
     // console.log(`Query String: ${queryString}`);
     if (JSON.stringify(req.query).includes('json')) {
       return res.send(results); // JSON response for API requests
     }
-    results.queryString = queryString; // Add query string to results for the view
+    results.queryString = queryString;
+    results.types = types; // Add query string to results for the view
     res.render('inspect', results); // HTML display
   } catch (error) {
     console.error(`Error inspecting ID ${id}:`, error);
-    return res.status(400).send('Entry not found or invalid ID');
+    return res
+      .status(400)
+      .send(`Entry not found or invalid ID: ${id}; ${error}`);
   }
 });
 
