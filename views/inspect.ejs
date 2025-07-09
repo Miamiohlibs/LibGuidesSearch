@@ -10,12 +10,17 @@
 <body class="container">
     <main>
     <h1>Inspect LibGuide: <%= item.name %></h1>
-    <%- include ('partials/back-button', { queryString: queryString }) %>
+    <% const typesParams = new URLSearchParams(); %>
+    <% typesParams.set('types',types); %>
+    <%- include ('partials/back-button', { typeString: typesParams.toString() }) %>
     <div class="mt-4">
-    <form id="kwic-chars-form" method="get">      
-    <p><strong>Owner:</strong> <%= item.owner_name %></p>
-    <p><strong>Keywords:</strong> <%= JSON.stringify(item.terms) %></p>
-    <p><strong># Total Pages:</strong> <%= item.page_urls.length %></p>
+    <form id="kwic-chars-form" method="get">
+        <% if (types != undefined) { %>
+        <input type="hidden" name="types" value="<%= types %>">
+        <% } %>  
+        <p><strong>Owner:</strong> <%= item.owner_name %></p>
+        <p><strong>Keywords:</strong> <%= JSON.stringify(item.terms) %></p>
+        <p><strong># Total Pages:</strong> <%= item.page_urls.length %></p>
 
         <p class="input-group">
             <span class="input-group-text"><strong>Characters Around Keywords</strong> </span>
