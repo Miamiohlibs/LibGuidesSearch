@@ -22,13 +22,13 @@ If you just want to search for one or two terms, you can use LibGuides' own sear
    - Give it the permissions for "Get list of Guides"
 6. Edit the `config/default.json` file to set your LibGuides API clientId and clientSecret and any other configuration options you need.
 7. Copy the `config/sample-wordlist.js` to another file, e.g. `config/wordlist.js`, and edit it to include the search terms you want to use. The sample file includes a few example terms, but you can add as many as you like. Each term should be a string in the array. Update the `config/default.json` file's `wordListConfig` value to point to your wordlist file if you named it something other than `sample-wordlist.js`.
-8. On the Linux/Mac command line run: `./runAllStages.sh` to fetch and process the data. This will take a long time (maybe 15 minutes), as it runs a succession of scripts to fetch and process the data.
+8. On the Linux/Mac command line run: `node runAllStages.js` to fetch and process the data. This will take a long time (maybe 15 minutes), as it runs a succession of scripts to fetch and process the data.
 9. At this point, you should have a `public/docs/libGuidesSearchReport.csv` file that contains a report of the search results.
 10. You can now run the web app with `node ./app.js` to start the search engine. By default it will run on port 3000 on your own machine; you can change the port in the `config/default.json` file.
 
 ## Usage
 
-On the Linux command line, run: `runAllStages.js` -- Note: this will take a long time. It runs a succession of four Node and Bash scripts, which you can run individually if needed:
+On the Linux command line, run: `node runAllStages.js` -- Note: this will take a long time. It runs a succession of four Node and Bash scripts, which you can run individually if needed:
 
 - `node ./stage1-fetchData.js`
 - `node ./stage2-collateData.js`
