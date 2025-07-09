@@ -6,6 +6,7 @@ If you just want to search for one or two terms, you can use LibGuides' own sear
 
 ## Requirements
 
+- git [Installation instructions](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - npm & Node.js (v20 or later) [Installation instructions](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - Mac, Windows, or Linux
 
