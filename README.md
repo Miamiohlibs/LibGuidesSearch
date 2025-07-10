@@ -6,11 +6,25 @@ If you just want to search for one or two terms, you can use LibGuides' own sear
 
 ## Requirements
 
+To run this project on your own device, you will need the following:
+
 - git [Installation instructions](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - npm & Node.js (v20 or later) [Installation instructions](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
 - Mac, Windows, or Linux
 
+Note: If you use Setup Option 1 below, you will not need to install anything on your own computer, as it will run in a GitHub Codespace (in the cloud).
+
 ## Setup
+
+### Option 1: Use on GitHub Codespaces
+
+1. Go to the [LibGuidesSearch repository](https://github.com/Miamiohlibs/LibGuidesSearch)
+2. Click on the "Code" button and select "Open with Codespaces"
+3. Follow the prompts to create a new Codespace
+4. Follow steps 3-10 below to set up the configuration and run the search preparations
+5. Once you run the `node ./app.js` command, the web app will be available at the URL provided in the terminal (usually something like `https://<your-codespace-name>-3000.preview.app.github.dev`)
+
+### Option 2: Setup on your own computer
 
 1. Clone the repository: `git clone https://github.com/Miamiohlibs/LibGuidesSearch.git`
 2. Change into the directory: `cd LibGuidesSearch`
