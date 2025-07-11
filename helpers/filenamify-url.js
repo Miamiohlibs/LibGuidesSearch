@@ -1,4 +1,4 @@
-const filenamify = require('filenamify').default;
+const filenamify = require('filenamify');
 
 module.exports = function (input) {
   if (typeof input !== 'string') {
