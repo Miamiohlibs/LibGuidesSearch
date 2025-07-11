@@ -6,7 +6,6 @@
  * then outputs page urls only to output/page_urls.txt
  */
 import fs from 'fs/promises';
-import path from 'path';
 
 async function summarize() {
   const inputPath = 'output/results.json';
