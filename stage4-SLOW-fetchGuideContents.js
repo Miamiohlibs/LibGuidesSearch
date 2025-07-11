@@ -3,12 +3,18 @@
 // reads input from output/page_urls.txt
 // writes output to cache/libGuidesPages
 
-const fs = require('fs/promises');
-const { existsSync, mkdirSync } = require('fs');
-const path = require('path');
-const https = require('https');
-const http = require('http');
-const filenamify = require('./helpers/filenamify-url');
+import fs from 'fs/promises';
+// const fs = require('fs/promises');
+import { existsSync, mkdirSync } from 'fs';
+// const { existsSync, mkdirSync } = require('fs');
+import path from 'path';
+// const path = require('path');
+import https from 'https';
+// const https = require('https');
+import http from 'http';
+// const http = require('http');
+import filenamify from 'filenamify-url';
+// const filenamify = require('./helpers/filenamify-url');
 
 const inputPath = 'output/page_urls.txt';
 const cacheDir = 'cache/libGuidesPages';
