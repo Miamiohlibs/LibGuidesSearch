@@ -1,6 +1,6 @@
-const c = require('config');
+import config from 'config';
 
-module.exports = class Results {
+export default class Results {
   constructor() {
     this.results = [];
   }
@@ -46,4 +46,4 @@ module.exports = class Results {
   clearResults() {
     this.results = [];
   }
-};
+}
