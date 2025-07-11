@@ -1,7 +1,8 @@
-const summary = require('../output/summary.json');
-const InspectController = require('./InspectController');
+import json2obj from '../helpers/json2obj.js';
+const summary = await json2obj('../output/summary.json');
+import InspectController from './InspectController.js';
 
-module.exports = ReportController = function ReportController() {
+export default function ReportController() {
   // const reportItems = summary.slice(0, 10); // Limit to first 10 items for testing
   const reportItems = summary; // Use the entire summary for the report
   const report = {
@@ -33,4 +34,4 @@ module.exports = ReportController = function ReportController() {
   });
   report.totalEntries = report.items.length;
   return report;
-};
+}
