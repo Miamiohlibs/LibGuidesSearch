@@ -5,4 +5,4 @@ const terms = [
   'example term 4',
 ];
 
-module.exports = terms;
+export default terms;

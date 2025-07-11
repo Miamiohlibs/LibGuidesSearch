@@ -1,5 +1,7 @@
-const config = require('config');
-const axios = require('axios');
+// const config = require('config');
+import config from 'config';
+// const axios = require('axios');
+import axios from 'axios';
 
 class LibGuidesSearch {
   constructor(token) {
@@ -26,4 +28,4 @@ class LibGuidesSearch {
     }
   }
 }
-module.exports = LibGuidesSearch;
+export default LibGuidesSearch;

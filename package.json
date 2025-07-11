@@ -4,7 +4,7 @@
   "description": "Search LibGuides for multiple search terms",
   "license": "MIT",
   "author": "Ken Irwin",
-  "type": "commonjs",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "test": "jest"
