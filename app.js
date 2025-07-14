@@ -1,9 +1,22 @@
-const path = require('path');
-const express = require('express');
+// const path = require('path');
+// const express = require('express');
+// const app = express();
+// const config = require('config');
+// const InspectController = require('./controllers/InspectController');
+// const json2csv = require('json2csv').parse;
+
+import path from 'path';
+import express from 'express';
+import config from 'config';
+import InspectController from './controllers/InspectController.js';
+import { parse as json2csv } from 'json2csv';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
-const config = require('config');
-const InspectController = require('./controllers/InspectController');
-const json2csv = require('json2csv').parse;
+import fs from 'fs';
+import json2obj from './helpers/json2obj.js';
+import ReportController from './controllers/ReportController.js';
 
 // basic express server setup
 app.set('views', path.resolve(__dirname, 'views'));
@@ -12,9 +25,11 @@ app.set('view engine', 'ejs');
 // Middleware to serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-  const summary = require('./output/summary.json');
-
+app.get('/', async (req, res) => {
+  const filePath = new URL('./output/summary.json', import.meta.url);
+  console.log(`Reading summary from: ${filePath}`);
+  const summary = await json2obj(filePath);
+  // res.send(summary);
   res.render('index', {
     title: 'LibGuides Search Results',
     summary: summary,
@@ -58,13 +73,13 @@ app.get('/report', (req, res) => {
     'docs',
     'libGuidesSearchReport.csv'
   );
-  if (require('fs').existsSync(filePath)) {
+  if (fs.existsSync(filePath)) {
     return res.download(filePath); // Download the report file
   }
   // If the file does not exist, generate the report
   else {
-    const summary = require('./output/summary.json');
-    const ReportController = require('./controllers/ReportController');
+    // const summary = require('./output/summary.json');
+    // const ReportController = require('./controllers/ReportController');
     let report = ReportController();
     if (JSON.stringify(req.query).includes('json')) {
       return res.send(report); // JSON response for API requests
