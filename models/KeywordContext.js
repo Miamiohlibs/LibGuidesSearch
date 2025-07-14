@@ -1,6 +1,6 @@
-const config = require('config');
+import config from 'config';
 
-module.exports = class KeywordContext {
+export default class KeywordContext {
   constructor() {
     // default to showing 50 chars on either side of keyword
     this.chars = 50; // Number of characters to show before and after the keyword
@@ -42,4 +42,4 @@ module.exports = class KeywordContext {
     }
     // console.log(`reset kwicChars to ${nInt}`);
   }
-};
+}

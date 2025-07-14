@@ -1,9 +1,16 @@
-const path = require('path');
-const express = require('express');
+import config from 'config';
+import fs from 'fs';
+import path from 'path';
+import express from 'express';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+import ReportController from './controllers/ReportController.js';
+import InspectController from './controllers/InspectController.js';
+import json2obj from './helpers/json2obj.js';
+import { parse as json2csv } from 'json2csv';
+
 const app = express();
-const config = require('config');
-const InspectController = require('./controllers/InspectController');
-const json2csv = require('json2csv').parse;
 
 // basic express server setup
 app.set('views', path.resolve(__dirname, 'views'));
@@ -12,9 +19,9 @@ app.set('view engine', 'ejs');
 // Middleware to serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-  const summary = require('./output/summary.json');
-
+app.get('/', async (req, res) => {
+  const filePath = new URL('./output/summary.json', import.meta.url);
+  const summary = await json2obj(filePath);
   res.render('index', {
     title: 'LibGuides Search Results',
     summary: summary,
@@ -58,13 +65,11 @@ app.get('/report', (req, res) => {
     'docs',
     'libGuidesSearchReport.csv'
   );
-  if (require('fs').existsSync(filePath)) {
+  if (fs.existsSync(filePath)) {
     return res.download(filePath); // Download the report file
   }
   // If the file does not exist, generate the report
   else {
-    const summary = require('./output/summary.json');
-    const ReportController = require('./controllers/ReportController');
     let report = ReportController();
     if (JSON.stringify(req.query).includes('json')) {
       return res.send(report); // JSON response for API requests

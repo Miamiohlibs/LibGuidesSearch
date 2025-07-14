@@ -1,13 +1,18 @@
-const ReportController = require('./controllers/ReportController');
-const json2csv = require('json2csv').parse;
+import ReportController from './controllers/ReportController.js';
+import { parse } from 'json2csv';
+
+import fs from 'fs';
 let report = ReportController();
-const fs = require('fs');
-const path = require('path');
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const outputPath = path.join(
   __dirname,
   'public',
   'docs',
   'libGuidesSearchReport.csv'
 );
-fs.writeFileSync(outputPath, json2csv(report.items), 'utf8');
+fs.writeFileSync(outputPath, parse(report.items), 'utf8');
 console.log(`Report generated and saved to ${outputPath}`);

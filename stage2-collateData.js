@@ -1,17 +1,17 @@
-const config = require('config');
-const fs = require('fs');
-const path = require('path');
-const { exit } = require('process');
-const wordListFile = config.get('wordListConfig');
+import { fileURLToPath } from 'url';
+import path from 'path';
+import fs from 'fs';
+import Results from './models/Results.js';
+import { exit } from 'process';
+import terms from './helpers/getWordlist.js';
 
 try {
-  const termFile = path.resolve(__dirname, 'config', wordListFile);
-  // const terms = fs.existsSync(termFile) ? fs.readFileSync(termFile, 'utf8').split('\n').filter(Boolean) : [];
-  const terms = require(termFile);
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
   const outputFile = path.resolve(__dirname, 'output', 'results.json');
 
   // read from file and compile results
-  const Results = require('./models/Results');
+  // const Results = require('./models/Results');
   const results = new Results();
 
   terms.forEach((term) => {

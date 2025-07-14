@@ -5,8 +5,7 @@
  * writes output to output/summary.json
  * then outputs page urls only to output/page_urls.txt
  */
-const fs = require('fs/promises');
-const path = require('path');
+import fs from 'fs/promises';
 
 async function summarize() {
   const inputPath = 'output/results.json';

@@ -1,14 +1,16 @@
-const summary = require('../output/summary.json');
-const fs = require('fs');
-const path = require('path');
-const filenamify = require('../helpers/filenamify-url');
-const Kwic = require('../models/KeywordContext');
+import json2obj from '../helpers/json2obj.js';
+const summary = await json2obj('../output/summary.json');
+import fs from 'fs';
+import path from 'path';
+import filenamify from 'filenamify-url';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+import Kwic from '../models/KeywordContext.js';
 const kwic = new Kwic();
 
-module.exports = InspectController = function InspectController(
-  id,
-  kwicChars = undefined
-) {
+export default function InspectController(id, kwicChars = undefined) {
   // find the requested item in the summary by id
   const item = summary.find((item) => parseInt(item.id) === parseInt(id));
   if (!item) {
@@ -52,4 +54,4 @@ module.exports = InspectController = function InspectController(
   });
 
   return { item, kwicChars: kwic.chars, results: filenames };
-};
+}

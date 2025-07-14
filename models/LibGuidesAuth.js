@@ -1,5 +1,7 @@
-const config = require('config');
-const axios = require('axios');
+// const config = require('config');
+import config from 'config';
+// const axios = require('axios');
+import axios from 'axios';
 // const { getLogger } = require('../utils/logger');
 
 class LibGuidesAuth {
@@ -26,4 +28,4 @@ class LibGuidesAuth {
   }
 }
 
-module.exports = LibGuidesAuth;
+export default LibGuidesAuth;
