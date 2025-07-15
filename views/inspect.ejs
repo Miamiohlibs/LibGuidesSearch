@@ -12,7 +12,13 @@
     <h1>Inspect LibGuide: <%= item.name %></h1>
     <% const typesParams = new URLSearchParams(); %>
     <% typesParams.set('types',types); %>
-    <%- include ('partials/back-button', { typeString: typesParams.toString() }) %>
+    <% let typeString; %>
+    <% if (typesParams.toString() === 'types=null') { %>
+        <% typeString = ''; %>
+    <% } else { %>
+        <% typeString = typesParams.toString(); %>
+    <% } %>
+    <%- include ('partials/back-button', { typeString }) %>
     <div class="mt-4">
     <form id="kwic-chars-form" method="get">
         <% if (types != undefined) { %>
